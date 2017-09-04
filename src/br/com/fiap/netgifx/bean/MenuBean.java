@@ -17,85 +17,89 @@ public class MenuBean {
 
 		//Busca usuario logado getUsuario()
 		
-		//Substituir por usuario.logado()
+		//Substituir por usuario.isLogado()
 		if (true){
-			DefaultSubMenu firstSubmenu = new DefaultSubMenu("Categorias");
-
-			DefaultMenuItem categoria;
+			model.addElement(menuCategorias());
 			
-			//Conectar com banco de dados para buscar categorias
-			for (int i = 0; i < 3; i++) {
-				categoria = new DefaultMenuItem("Categoria: " + i);
-				categoria.setUrl("url para categorias");
-
-				firstSubmenu.addElement(categoria);			
+			//Substituir por usuario.isAdmin()
+			if(true){
+				model.addElement(cadastrarCategoria());
+				model.addElement(cadastrarGif());
 			}
-		 
-			model.addElement(firstSubmenu);
-
-			//Buscar nome do usuario do objeto Usuario
-			DefaultSubMenu secondSubmenu = new DefaultSubMenu("usuario.getNome()");
 			
-			DefaultMenuItem perfil = new DefaultMenuItem("Perfil");
-			perfil.setUrl("url para detalhes do perfil");
-			
-			secondSubmenu.addElement(perfil);
-			
-			secondSubmenu.addElement(new DefaultSeparator());
-			
-			DefaultMenuItem logout = new DefaultMenuItem("Logout");
-			//Deslogar usuario usuario.logout()
-			
-			secondSubmenu.addElement(logout);
-			
-			model.addElement(secondSubmenu);
+			model.addElement(menuConta());
+		}else{
+			model.addElement(login());
+			model.addElement(signin());
 		}
 	}
+	
+	private DefaultSubMenu menuCategorias(){
+		DefaultSubMenu categorias = new DefaultSubMenu("Categorias");
+
+		DefaultMenuItem categoria;
+		
+		//Conectar com banco de dados para buscar categorias
+		for (int i = 0; i < 3; i++) {
+			categoria = new DefaultMenuItem("Categoria: " + i);
+			categoria.setUrl("url para categorias");
+
+			categorias.addElement(categoria);			
+		}
+		
+		return categorias;
+	}
+	
+	private DefaultSubMenu menuConta(){
+		//Buscar nome do usuario do objeto Usuario
+		DefaultSubMenu conta = new DefaultSubMenu("usuario.getNome()");
+		
+		DefaultMenuItem perfil = new DefaultMenuItem("Perfil");
+		perfil.setUrl("url para detalhes do perfil");
+		
+		conta.addElement(perfil);
+		
+		conta.addElement(new DefaultSeparator());
+		
+		DefaultMenuItem logout = new DefaultMenuItem("Logout");
+		//Deslogar usuario usuario.logout()
+		
+		conta.addElement(logout);
+		
+		return conta;
+	}
+	
+	private DefaultMenuItem cadastrarCategoria(){
+		DefaultMenuItem cadastrarCategoria = new DefaultMenuItem("Cadastrar Categoria");
+		cadastrarCategoria.setUrl("url para cadastro de categorias");
+		
+		return cadastrarCategoria;
+	}
 		 
+	private DefaultMenuItem cadastrarGif(){
+		DefaultMenuItem cadastrarGif = new DefaultMenuItem("Cadastrar Gif");
+		cadastrarGif.setUrl("url para cadastro de gifs");
+		
+		return cadastrarGif;
+		
+	}
+
+	private DefaultMenuItem login(){
+		DefaultMenuItem login = new DefaultMenuItem("Login");
+		login.setUrl("url para login");
+		
+		return login;
+	}
+		 
+	private DefaultMenuItem signin(){
+		DefaultMenuItem signin = new DefaultMenuItem("Cadastre-se");
+		signin.setUrl("url para signin");
+		
+		return signin;
+		
+	}
+	
 	public MenuModel getModel() {
 		return model;
 	}	
-	
-/*	private String phone;
-	
-    public String getPhone() {
-        return phone;
-    }
- 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-	
-	public void logout(){
-		System.out.println("Logout disparado");
-	}
-*/
-	
-/*	private MenuModel model;
-
-	public menuBean() {
-		model = new DefaultMenuModel();
-
-        //First submenu  
-        Submenu submenu = new Submenu();  
-	        submenu.setLabel("Dynamic Submenu 1");  
-	        MenuItem item = new MenuItem();  
-	        item.setValue("Dynamic Menuitem 1.1");  
-	        item.setUrl("#");  
-	        submenu.getChildren().add(item);  
-	        model.addSubmenu(submenu);  
-	        //Second submenu  
-	        submenu = new Submenu();  
-	        submenu.setLabel("Dynamic Submenu 2");  
-	        item = new MenuItem();  
-	        item.setValue("Dynamic Menuitem 2.1");  
-	        item.setUrl("#");  
-	        submenu.getChildren().add(item);  
-	        item = new MenuItem();  
-	        item.setValue("Dynamic Menuitem 2.2");  
-	        item.setUrl("#");  
-	        submenu.getChildren().add(item);  
-	        model.addSubmenu(submenu);  
-	    }
-	    */
 }
